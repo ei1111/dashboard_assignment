@@ -3,7 +3,7 @@ spring:
     activate:
       on-profile:
   datasource:
-    url: "jdbc:h2:mem:boiler;MODE=MYSQL;NON_KEYWORDS=USER"
+    url: "jdbc:h2:mem:dashBoard;MODE=MYSQL;NON_KEYWORDS=USER"
     username: "sa"
     password: ""
     driver-class-name: org.h2.Driver
