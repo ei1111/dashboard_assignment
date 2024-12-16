@@ -22,9 +22,9 @@ public class JwtUtil {
     }
 
     /*토큰 생성*/
-    public String createJwt(String userId) {
+    public String createJwt(String userName) {
         return Jwts.builder()
-                .claim("userId", userId)
+                .claim("userName", userName)
                 //발행시간
                 .issuedAt(new Date(System.currentTimeMillis()))
                 //만료시간
@@ -34,14 +34,14 @@ public class JwtUtil {
     }
 
     /*사용자 아이디 찾기*/
-    public String getUserId(String token) {
+    public String getUserName(String token) {
         //토큰이 우리서버에서 생성되었는지 파악
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
-                .get("userId", String.class);
+                .get("userName", String.class);
     }
 
     /*토큰 검증*/

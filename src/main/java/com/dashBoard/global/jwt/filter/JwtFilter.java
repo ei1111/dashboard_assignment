@@ -2,7 +2,7 @@ package com.dashBoard.global.jwt.filter;
 
 import com.dashBoard.global.utils.JwtUtil;
 import com.dashBoard.login.CustomUserDetails;
-import com.dashBoard.user.infrastructure.domain.Users;
+import com.dashBoard.user.infrastructure.domain.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,8 +39,8 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-        String userId = jwtUtil.getUserId(token);
-        Users user = Users.builder().userId(userId).build();
+        String userName = jwtUtil.getUserName(token);
+        User user = User.builder().name(userName).build();
 
         CustomUserDetails customUserDetails = new CustomUserDetails(user);
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());

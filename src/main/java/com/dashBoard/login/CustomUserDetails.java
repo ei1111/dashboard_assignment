@@ -1,6 +1,6 @@
 package com.dashBoard.login;
 
-import com.dashBoard.user.infrastructure.domain.Users;
+import com.dashBoard.user.infrastructure.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
-    private final Users users;
+    private final User user;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
@@ -26,12 +26,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return users.getPassword();
+        return "";
     }
 
     @Override
     public String getUsername() {
-        return users.getUserId();
+        return user.getName();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.dashBoard.global.utils;
 
-import com.dashBoard.user.infrastructure.domain.Users;
+import com.dashBoard.user.infrastructure.domain.User;
 import com.dashBoard.user.request.UserRequestDto;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,18 +46,14 @@ public class Aes256 implements PasswordEncoder {
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
         return this.encode(rawPassword).equals(encodedPassword) ? true : false;
     }
-    public Users userEncryptAes256(UserRequestDto userRequestDto) {
+    public User userEncryptAes256(UserRequestDto userRequestDto) {
         try {
-            String userserId = userRequestDto.getUserId();
-            String encryptUserPassword = encode(userRequestDto.getPassword());
             String encryptUserName = encode(userRequestDto.getName());
-            String encryptUserRegNo = encode(userRequestDto.getRegNo());
+            int userAge = userRequestDto.getAge();
 
-            return Users.builder()
-                    .userId(userserId)
-                    .password(encryptUserPassword)
+            return User.builder()
                     .name(encryptUserName)
-                    .regNo(encryptUserRegNo)
+                    .age(userAge)
                     .build();
 
         } catch (Exception e) {
